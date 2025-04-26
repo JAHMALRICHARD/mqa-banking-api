@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "tier": "Basic",
+    "monthlyPrice": 19.99,
+    "yearlyPrice": 199.99,
+    "planDetails": [
+      "Access to basic banking features",
+      "Online account management",
+      "24/7 customer support via email"
+    ]
+  },
+  {
+    "id": 2,
+    "tier": "Standard",
+    "monthlyPrice": 29.99,
+    "yearlyPrice": 299.99,
+    "planDetails": [
+      "Everything in Basic",
+      "Bill payment and transfers",
+      "Mobile banking app",
+      "Standard savings account"
+    ]
+  },
+  {
+    "id": 3,
+    "tier": "Premium",
+    "monthlyPrice": 49.99,
+    "yearlyPrice": 499.99,
+    "planDetails": [
+      "Everything in Standard",
+      "Higher interest savings account",
+      "Personal financial advisor access",
+      "Priority 24/7 customer support via phone and email"
+    ]
+  },
+  {
+    "id": 4,
+    "tier": "Enterprise",
+    "monthlyPrice": 99.99,
+    "yearlyPrice": 999.99,
+    "planDetails": [
+      "Everything in Premium",
+      "Unlimited checking accounts",
+      "Corporate expense management",
+      "Dedicated account manager",
+      "Customized financial reporting and analytics"
+    ]
+  }
+]
