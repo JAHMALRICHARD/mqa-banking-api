@@ -30,6 +30,11 @@ app.use('/api/persons', require('./routes/personRoutes'));
 app.use('/api/billing', require('./routes/billingRoutes'));
 app.use('/api/subscriptions', require('./routes/subscriptionRoutes'));
 
+// ➡️ Add this:
+app.get('/', (req, res) => {
+  res.send('✅ Financial API is up and running!');
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`Financial API running on http://localhost:${port}`);
