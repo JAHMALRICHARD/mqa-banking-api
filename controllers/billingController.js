@@ -82,19 +82,16 @@ exports.createBillingForPerson = async (req, res) => {
     amount
   } = req.body;
 
-  // Basic field validation
   if (!streetAddress || !city || !state || !zip || !phoneNumber || !cardNumber || !expDate || !cvv || !subscriptionName || amount == null) {
     return res.status(400).json({ message: "Missing required fields" });
   }
 
   try {
-    // Check if the person exists
     const person = await Person.findById(personId).select('firstName lastName email');
     if (!person) {
       return res.status(404).json({ message: "Person not found" });
     }
 
-    // Create billing entry
     const newBilling = new Billing({
       personId: person._id,
       streetAddress,
@@ -110,18 +107,32 @@ exports.createBillingForPerson = async (req, res) => {
     });
 
     const savedBilling = await newBilling.save();
+    const billingObject = savedBilling.toObject();
 
-    // Combine billing and person info
-    const response = {
-      ...savedBilling.toObject(),
-      personId: person
+    // Transform person sub-document
+    const personObj = {
+      id: person._id,
+      firstName: person.firstName,
+      lastName: person.lastName,
+      email: person.email
     };
+
+    // Final formatted response
+    const response = {
+      ...billingObject,
+      id: billingObject._id,
+      personId: personObj
+    };
+
+    delete response._id;
+    delete response.__v;
 
     res.status(201).json(response);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 
 // UPDATE billing details
