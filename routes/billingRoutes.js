@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const billingController = require('../controllers/billingController');
 
-router.post('/billing/:personId', billingController.createBillingForPerson);
+router.post('/:personId', billingController.createBillingForPerson);
 
 router.get('/', billingController.getAllBillingDetails);
 router.get('/:id', billingController.getBillingDetailsById);

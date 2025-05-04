@@ -3,9 +3,11 @@ const apiDocs = {
   billing: [
     { method: 'GET', url: '/api/billing', description: 'Get all billing records (with populated person details)' },
     { method: 'GET', url: '/api/billing/:id', description: 'Get a single billing record by its ID' },
+    { method: 'POST', url: '/api/billing/:personID', description: 'Create a new billing record via Person ID' },
     { method: 'POST', url: '/api/billing', description: 'Create a new billing record' },
     { method: 'PUT', url: '/api/billing/:id', description: 'Update an existing billing record by its ID' },
     { method: 'DELETE', url: '/api/billing/:id', description: 'Delete a billing record by its ID' }
+    
   ],
   persons: [
     { method: 'GET', url: '/api/persons', description: 'Get all persons' },
