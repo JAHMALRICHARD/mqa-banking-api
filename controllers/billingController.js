@@ -1,4 +1,5 @@
 const Billing = require('../models/Billing');
+const Person = require('../models/Person'); // ensure this is at the top
 
 // GET all billing details
 exports.getAllBillingDetails = async (req, res) => {
@@ -60,6 +61,57 @@ exports.createBillingDetails = async (req, res) => {
 
     const savedBilling = await newBilling.save();
     res.status(201).json(savedBilling);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// CREATE new billing details using person id
+exports.createBillingForPerson = async (req, res) => {
+  const personId = req.params.personId;
+  const {
+    streetAddress,
+    city,
+    state,
+    zip,
+    phoneNumber,
+    cardNumber,
+    expDate,
+    cvv,
+    subscriptionName,
+    amount
+  } = req.body;
+
+  // Validate required fields
+  if (!streetAddress || !city || !state || !zip || !phoneNumber || !cardNumber || !expDate || !cvv || !subscriptionName || amount == null) {
+    return res.status(400).json({ message: "Missing required fields" });
+  }
+
+  try {
+    // Ensure person exists
+    const person = await Person.findById(personId);
+    if (!person) {
+      return res.status(404).json({ message: "Person not found" });
+    }
+
+    const newBilling = new Billing({
+      personId,
+      streetAddress,
+      city,
+      state,
+      zip,
+      phoneNumber,
+      cardNumber,
+      expDate,
+      cvv,
+      subscriptionName,
+      amount
+    });
+
+    const savedBilling = await newBilling.save();
+    const populatedBilling = await Billing.findById(savedBilling._id).populate('personId', 'firstName lastName email');
+
+    res.status(201).json(populatedBilling);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
