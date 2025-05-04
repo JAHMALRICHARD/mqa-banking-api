@@ -67,9 +67,6 @@ exports.createBillingDetails = async (req, res) => {
 };
 
 // CREATE new billing details using person id
-const Billing = require('../models/Billing');
-const Person = require('../models/Person');
-
 exports.createBillingForPerson = async (req, res) => {
   const { personId } = req.params;
   const {
